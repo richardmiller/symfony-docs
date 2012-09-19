@@ -6,7 +6,7 @@ Compiling the Container
 
 The service container can be compiled for various reasons. These reasons
 include checking for any potential issues such as circular references and
-making the container more efficient by resolving parameters and removing 
+making the container more efficient by resolving parameters and removing
 unused services.
 
 It is compiled by running::
@@ -21,6 +21,8 @@ in the container. After this and several other passes that check the container's
 validity, further compiler passes are used to optimize the configuration
 before it is cached. For example, private services and abstract services
 are removed, and aliases are resolved.
+
+.. _components-dependency-injection-extension:
 
 Managing Configuration with Extensions
 --------------------------------------
@@ -238,6 +240,8 @@ but also load a secondary one only if a certain parameter is set::
     You should instead use a compiler pass which works with the full container
     after the extensions have been processed.
 
+.. _components-dependency-injection-compiler-passes:
+
 Creating a Compiler Pass
 ------------------------
 
@@ -300,6 +304,8 @@ For example, to run your custom pass after the default removal passes have been 
 
     $container = new ContainerBuilder();
     $container->addCompilerPass(new CustomCompilerPass, PassConfig::TYPE_AFTER_REMOVING);
+
+.. _components-dependency-injection-dumping:
 
 Dumping the Configuration for Performance
 -----------------------------------------
@@ -371,7 +377,7 @@ but getting an up to date configuration whilst developing your application::
         // ...
         $container->compile();
 
-        if(!$isDebug) 
+        if(!$isDebug)
             $dumper = new PhpDumper($container);
             file_put_contents($file, $dumper->dump(array('class' => 'MyCachedContainer')));
         }
